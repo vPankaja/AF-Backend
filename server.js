@@ -1,36 +1,38 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const app = express();
-require("dotenv").config();
+import express from "express";
+import dotenv from "dotenv";
+import morgan from "morgan";
+import connectDB from "./config/db.js";
+import cors from "cors";
+import path from "path";
 
-const PORT = process.env.PORT || 8070;
+// Routes
+import adminRoutes from "./routes/adminRoutes.js";
+
+dotenv.config();
+
+//connect database
+connectDB();
+
+const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-const URL = process.env.MONGODB_URL;
+// Calling Routes
+app.use("/api/admins", adminRoutes);
 
-mongoose.connect(URL, {
-    // useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    // useFindAndModify: false,
-})
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
-const connection = mongoose.connection
+app.get("/", (req, res) => {
+  res.send("Api is working");
+});
 
-connection.once("open", () => {
-    console.log("mongodb connection success!")
-})
+//create port
+const PORT = process.env.PORT || 6500;
 
-//Pankaja routes
-const adminRouter = require("./routes/admin.js")
-app.use("/admin", adminRouter)
-
-
-app.listen(PORT, () => {
-    console.log(`server is up and running on port number: ${PORT}`)
-  })
+app.listen(
+  PORT,
+  console.log(`server running in ${process.env.NODE_ENV} port ${PORT}`)
+);
