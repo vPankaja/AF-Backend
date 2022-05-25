@@ -7,6 +7,7 @@ import path from "path";
 
 // Routes
 import adminRoutes from "./routes/adminRoutes.js";
+import markingRoutes from "./routes/markingRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // Calling Routes
 app.use("/api/admins", adminRoutes);
+app.use('/api/marking', markingRoutes);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
