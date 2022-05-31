@@ -1,7 +1,7 @@
 import  mongoose  from 'mongoose'
 
-//Admin Database
-const adminSchema = mongoose.Schema(
+//User Database
+const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -28,23 +28,27 @@ const adminSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    }
   },
   {
     timestamps: true,
   }
 );
 
-adminSchema.methods.matchPassword = async function (enterPassword) {
+userSchema.methods.matchPassword = async function (enterPassword) {
   return enterPassword == this.password;
 };
 
-adminSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
 
 });
 
-const Admin = mongoose.model("Admin", adminSchema);
+const User = mongoose.model("User", userSchema);
 
-export default Admin
+export default User
