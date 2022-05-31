@@ -9,6 +9,7 @@ import path from "path";
 import userRoutes from "./routes/userRoutes.js";
 import markingRoutes from "./routes/markingRoutes.js";
 import panelRoutes from "./routes/panelRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/user", userRoutes);
 app.use('/marking', markingRoutes);
 app.use('/panel', panelRoutes);
+app.use("/student", studentRoutes);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
