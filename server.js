@@ -6,8 +6,9 @@ import cors from "cors";
 import path from "path";
 
 // Routes
-import adminRoutes from "./routes/adminRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import markingRoutes from "./routes/markingRoutes.js";
+import panelRoutes from "./routes/panelRoutes.js";
 
 dotenv.config();
 
@@ -20,8 +21,9 @@ app.use(cors());
 app.use(express.json());
 
 // Calling Routes
-app.use("/api/admins", adminRoutes);
-app.use('/api/marking', markingRoutes);
+app.use("/user", userRoutes);
+app.use('/marking', markingRoutes);
+app.use('/panel', panelRoutes);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
