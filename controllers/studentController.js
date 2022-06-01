@@ -2,7 +2,7 @@ import express from "express";
 
 import StudentGroup from "../models/studentGroupModel.js";
 import researchTopic from "../models/researchTopicModel.js";
-import Student from "../models/studentModel.js";
+import User from "../models/userModel.js";
 
 import asyncHandler from "express-async-handler";
 import generateToken from '../utils/generateTokens.js'
@@ -11,43 +11,47 @@ const router = express.Router();
 
 // Register Student
 const createStudent = asyncHandler(async (req, res) => {
-  const { name, nic, gender, contactNo, email, password } = req.body;
+  const { name, nic, gender, contactNo, email, password } = req.body
 
-  const userExists = await Student.findOne({ email });
+  const userExists = await User.findOne({ email })
 
-  if (userExists) {
-    res.status(400);
-    throw new Error("Student already exists");
+  if(userExists) {
+      res.status(400)
+      throw new Error('Student already exists')
   }
 
-  const user = await Student.create({
-    name,
-    nic,
-    gender,
-    contactNo,
-    email,
-    password,
-  });
+  const type = "STUDENT";
 
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      nic: user.nic,
-      gender: user.gender,
-      contactNo: user.contactNo,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+  const user = await User.create({
+      name,
+      nic,
+      gender,
+      contactNo,
+      email,
+      password,
+      type
+  })
+
+  if(user) {
+      res.status(201).json({
+       _id: user._id,
+       name: user.name,
+       nic: user.nic,
+       gender: user.gender,
+       contactNo: user.contactNo,
+       email: user.email,
+       type: user.type,
+       token: generateToken(user._id),
+      })
   } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+      res.status(400)
+      throw new Error('Invalid user data')
   }
 });
 
 // Get all students
 const getStudents = asyncHandler(async(req,res) => {
-    const student = await Student.find({});
+    const student = await User.find({ type: "STUDENT" });
     res.json(student);
 });
 
