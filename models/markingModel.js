@@ -6,7 +6,7 @@ const markingSchema = mongoose.Schema({
             required: true
       },
       assignmentName: {
-            type: Number,
+            type: String,
             required: true
       },
       overallMark: {
@@ -21,6 +21,6 @@ const markingSchema = mongoose.Schema({
       timestamps: true,
 })
 
-const Marking = mongoose.model('Marking Scheme', markingSchema)
+const Marking = mongoose.model('Markings', markingSchema)
 
 export default Marking

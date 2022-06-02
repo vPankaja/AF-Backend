@@ -20,9 +20,28 @@ const createMarking = asyncHandler(async (req, res) => {
       await newmarking.save();
       res.send("Marking Sheme Created Successfully");
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ error });
     }
   });
 
-  export {createMarking};
+  const getAllMarkings = asyncHandler(async (req, res) => {
+    const marking = await Marking.find({});
+    res.json(marking);
+  });
+
+  const deleteMarking = asyncHandler(async (req, res) => {
+    const marking = await Marking.findById(req.params.id);
+  
+    if (marking) {
+      await marking.remove();
+      res.json({ message: "Marking removed" });
+    } else {
+      res.status(404);
+      throw new Error("Marking not found");
+    }
+  });
+
+
+  export { createMarking, getAllMarkings, deleteMarking};
   

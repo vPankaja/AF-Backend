@@ -9,6 +9,7 @@ import path from "path";
 import userRoutes from "./routes/userRoutes.js";
 import markingRoutes from "./routes/markingRoutes.js";
 import panelRoutes from "./routes/panelRoutes.js";
+import fileUploadController from "./controllers/fileuploadController.js";
 
 dotenv.config();
 
@@ -24,6 +25,18 @@ app.use(express.json());
 app.use("/user", userRoutes);
 app.use('/marking', markingRoutes);
 app.use('/panel', panelRoutes);
+
+
+
+
+app.use('/api/files/', fileUploadController)
+
+
+const __dirname = path.resolve()
+//set upload folder
+app.use(express.static('/uploads/'));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
