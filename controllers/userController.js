@@ -31,6 +31,7 @@ const authUser = asyncHandler(async(req, res) => {
 const registerUser = asyncHandler(async(req, res) => {
     const { name, nic, gender, contactNo, email, password,type } = req.body
 
+  //validate user whether he or she exists 
    const userExists = await User.findOne({ email })
 
    if(userExists) {
@@ -75,17 +76,6 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 // get User by ID
 const getUserById = asyncHandler(async(req, res) => {
-  // let userID = req.params.id;
-  //    await User.findById(userID)
-  //     .then(() => {
-  //       res.status(200);
-  //     })
-  //     .catch(() => {
-  //       console.log();
-  //       res.status(500);
-  //     });
-  // });
-
     const user = await User.findById(req.params.id)
  
     if(user){
@@ -125,7 +115,6 @@ const getUserById = asyncHandler(async(req, res) => {
         gender,
         contactNo,
         email,
-        password,
         type
     } = req.body;
   
@@ -137,7 +126,6 @@ const getUserById = asyncHandler(async(req, res) => {
         (user.gender = gender),
         (user.contactNo = contactNo),
         (user.email = email),
-        (user.password = password),
         (user.type = type);
   
       const updateUser = await user.save();
