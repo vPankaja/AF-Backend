@@ -14,6 +14,7 @@ import subtypeRoutes from "./routes/subtypeRoutes.js";
 
 import fileUploadController from "./controllers/fileuploadController.js";
 
+import SupEvaluation from "./routes/SupEvaluation.js"
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use("/subtype", subtypeRoutes);
 
 app.use('/api/files/', fileUploadController)
 
+app.use("/supEve",SupEvaluation);
 
 const __dirname = path.resolve()
 //set upload folder
