@@ -6,14 +6,14 @@ const createSubType = asyncHandler(async (req, res) => {
         subName,
         submissionType,
         deadline,
-        specialNote,
+        explainST,
     } = req.body;
   
     const newsubType = new SubType({
         subName,
         submissionType,
         deadline,
-        specialNote,
+        explainST,
     });
     try {
       await newsubType.save();

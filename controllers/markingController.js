@@ -8,6 +8,7 @@ const createMarking = asyncHandler(async (req, res) => {
         assignmentName,
         overallMark,
         description,
+        attachment
     } = req.body;
   
     const newmarking = new Marking({
@@ -15,6 +16,7 @@ const createMarking = asyncHandler(async (req, res) => {
       assignmentName,
       overallMark,
       description,
+      attachment,
     });
     try {
       await newmarking.save();
