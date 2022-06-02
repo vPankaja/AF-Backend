@@ -14,7 +14,7 @@ const subTypeSchema = mongoose.Schema({
             type: String,
             required: true
       },
-      specialNote: {
+      explainST: {
             type: String,
             required: true
       },

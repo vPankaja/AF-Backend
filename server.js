@@ -12,7 +12,7 @@ import panelRoutes from "./routes/panelRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import subtypeRoutes from "./routes/subtypeRoutes.js";
 
-// import fileUploadController from "./controllers/fileuploadController";
+import fileUploadController from "./controllers/fileuploadController.js";
 
 
 dotenv.config();
@@ -35,7 +35,7 @@ app.use("/subtype", subtypeRoutes);
 
 
 
-// app.use('/api/files/', fileUploadController)
+app.use('/api/files/', fileUploadController)
 
 
 const __dirname = path.resolve()

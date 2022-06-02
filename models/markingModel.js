@@ -17,6 +17,10 @@ const markingSchema = mongoose.Schema({
             type: String,
             required: true
       },
+      attachment: {
+            type: String,
+            required: false
+      },
 }, {
       timestamps: true,
 })
