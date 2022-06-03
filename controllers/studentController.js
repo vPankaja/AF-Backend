@@ -90,7 +90,7 @@ const createGroup = asyncHandler(async (req, res) => {
 
 // Check if a student is in a group
 const checkStudentinGroup = asyncHandler(async (req, res) => {
-  const studentEmail = req.params.email;
+  const studentEmail = req.body.email;
 
   const studGroup1 = await StudentGroup.findOne({ member1: studentEmail });
   const studGroup2 = await StudentGroup.findOne({ member2: studentEmail });
@@ -101,6 +101,11 @@ const checkStudentinGroup = asyncHandler(async (req, res) => {
     res.json({
       available: false,
     });
+  }
+  else {
+    res.json({
+      available: true,
+    })
   }
 });
 
