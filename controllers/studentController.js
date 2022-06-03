@@ -109,28 +109,105 @@ const checkStudentinGroup = asyncHandler(async (req, res) => {
   }
 });
 
+// Get the group of the student
+const checkStudentGroup = asyncHandler(async (req, res) => {
+  const studentEmail = req.params.email;
+
+  const studGroup1 = await StudentGroup.findOne({ member1: studentEmail });
+  const studGroup2 = await StudentGroup.findOne({ member2: studentEmail });
+  const studGroup3 = await StudentGroup.findOne({ member3: studentEmail });
+  const studGroup4 = await StudentGroup.findOne({ member4: studentEmail });
+
+  if(studGroup1) {
+    res.json(studGroup1);
+  }
+  else if(studGroup2) {
+    res.json(studGroup2);
+  }
+  else if(studGroup3) {
+    res.json(studGroup3);
+  }
+  else if(studGroup4) {
+    res.json(studGroup4);
+  }
+  else {
+    res.json("No group")
+  }
+})
+
+
+// Get research by group name
+const getTopicByGroup = asyncHandler(async (req, res) => {
+  const group = req.params.groupName;
+
+  const research = await researchTopic.findOne({ groupId: group })
+
+  if(research) {
+    res.json(research);
+  }
+  else {
+    res.json("No research")
+  }
+})
+
+
+// Assign a cosupervisor
+const assignCoSup = asyncHandler(async (req, res) => {
+  const resId = req.body.id;
+  const coSup = req.body.coSupervisor
+
+  const research = await researchTopic.findByIdAndUpdate({ _id:resId }, {coSupervisor: coSup })
+
+  if(research) {
+    res.json(research)
+  }
+  else {
+    res.json("No research")
+  }
+})
+
+// Get research by id
+const getResearchByID = asyncHandler(async(req, res) => {
+  const resId = req.params.id;
+
+  const research = await researchTopic.findById({ _id:resId })
+
+  if(research) {
+    res.json(research);
+  }
+})
+
 // Register research topic
 const registerTopic = asyncHandler(async (req, res) => {
   const topic = req.body.topic;
   const groupId = req.body.groupId;
   const supervisor = req.body.supervisor;
-  const status = false;
+  const coSupervisor = "Not assigned";
+  const status = req.body.status;
 
-  const topicResearch = new researchTopic({
+  const topicResearch = await researchTopic.create({
     topic,
     groupId,
     supervisor,
+    coSupervisor,
     status,
   });
 
-  topicResearch
-    .save()
-    .then(() => {
-      res.json("Topic requested");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if(topicResearch) {
+    res.json("Topic requested");
+  }
+  else {
+    res.json("unsuccessful")
+  }
+
+  // topicResearch
+  //   .save()
+  //   .then(() => {
+  //     res.json("Topic requested");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 });
 
-export { createStudent, getStudents, createGroup, getGroups, checkStudentinGroup, registerTopic };
+export { createStudent, getStudents, createGroup, getGroups, checkStudentinGroup, checkStudentGroup, getTopicByGroup, assignCoSup, getResearchByID, registerTopic };
