@@ -7,7 +7,6 @@ const createMarking = asyncHandler(async (req, res) => {
         moduleName,
         assignmentName,
         overallMark,
-        description,
         attachment
     } = req.body;
   
@@ -15,7 +14,6 @@ const createMarking = asyncHandler(async (req, res) => {
       moduleName,
       assignmentName,
       overallMark,
-      description,
       attachment,
     });
     try {
