@@ -11,6 +11,7 @@ import markingRoutes from "./routes/markingRoutes.js";
 import panelRoutes from "./routes/panelRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import subtypeRoutes from "./routes/subtypeRoutes.js";
+import documentRoutes from "./routes/documentRoutes.js";
 
 import fileUploadController from "./controllers/fileuploadController.js";
 
@@ -31,6 +32,7 @@ app.use('/marking', markingRoutes);
 app.use('/panel', panelRoutes);
 app.use("/student", studentRoutes);
 app.use("/subtype", subtypeRoutes);
+app.use('/document', documentRoutes);
 
 
 

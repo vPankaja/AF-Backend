@@ -1,10 +1,6 @@
 import mongoose from 'mongoose'
 
 const markingSchema = mongoose.Schema({
-      moduleName: {
-            type: String,
-            required: true
-      },
       assignmentName: {
             type: String,
             required: true
