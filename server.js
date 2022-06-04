@@ -15,6 +15,8 @@ import documentRoutes from "./routes/documentRoutes.js";
 
 import fileUploadController from "./controllers/fileuploadController.js";
 
+import SupEvaluation from "./routes/SupEvaluation.js"
+import getTopic from "./routes/getTopic.js"
 
 dotenv.config();
 
@@ -39,6 +41,8 @@ app.use('/document', documentRoutes);
 
 app.use('/api/files/', fileUploadController)
 
+app.use("/supEve",SupEvaluation);
+app.use("/SupTopic",getTopic);
 
 const __dirname = path.resolve()
 //set upload folder
