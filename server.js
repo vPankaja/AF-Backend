@@ -11,10 +11,16 @@ import markingRoutes from "./routes/markingRoutes.js";
 import panelRoutes from "./routes/panelRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import subtypeRoutes from "./routes/subtypeRoutes.js";
+
+import documentSaveRoutes from "./routes/documentRoute.js"
+
 import documentRoutes from "./routes/documentRoutes.js";
 import apannelRoutes from "./routes/allocatePanelRoutes.js";
 
+
 import fileUploadController from "./controllers/fileuploadController.js";
+import documentUploadController from "./controllers/documentUploadController.js"
+
 
 import SupEvaluation from "./routes/SupEvaluation.js"
 import getTopic from "./routes/getTopic.js"
@@ -35,6 +41,9 @@ app.use('/marking', markingRoutes);
 app.use('/panel', panelRoutes);
 app.use("/student", studentRoutes);
 app.use("/subtype", subtypeRoutes);
+
+app.use("/documents/", documentSaveRoutes);
+
 app.use('/document', documentRoutes);
 app.use('/APannel',apannelRoutes);
 
@@ -42,6 +51,7 @@ app.use('/APannel',apannelRoutes);
 
 
 app.use('/api/files/', fileUploadController)
+app.use('/api/documents/', documentUploadController)
 
 app.use("/supEve",SupEvaluation);
 app.use("/SupTopic",getTopic);
