@@ -1,7 +1,7 @@
 import express from 'express'
 const  router = express.Router()
 
-import { createStudent, getStudents, createGroup, getGroups, checkStudentinGroup, checkStudentGroup, getTopicByGroup, assignCoSup, getResearchByID, registerTopic } from '../controllers/studentController.js'
+import { createStudent, getStudents, createGroup, getGroups, checkStudentinGroup, checkStudentGroup, getTopicByGroup, assignCoSup, getResearchByID, updateResearch, registerTopic } from '../controllers/studentController.js'
 
 router.post('/registerStudent', createStudent);
 router.get('/allStudents', getStudents);
@@ -13,5 +13,6 @@ router.get('/getGroup/:email', checkStudentGroup);
 router.get('/getResearchByGroup/:groupName', getTopicByGroup);
 router.post('/assingCoSup', assignCoSup);
 router.get('/getResearchById/:id', getResearchByID)
+router.put('/updateResearch/:id', updateResearch)
 
 export default router;
