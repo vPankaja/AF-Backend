@@ -5,13 +5,12 @@ import Document from '../models/documentModel.js';
 const uploadDocument = asyncHandler(async (req, res) => {
     const {
         assignmentname,
-        attachment
+        document
     } = req.body;
   
     const newdocument = new Document({
       assignmentname,
-      overallMark,
-      attachment,
+      document,
     });
     try {
       await newdocument.save();

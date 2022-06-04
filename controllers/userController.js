@@ -95,6 +95,11 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.json(user);
   });
 
+  const getpanelMembers = asyncHandler(async (req, res) => {
+    const user = await User.find({type: 'PANEL'});
+    res.json(user);
+  });
+
 
 // get User by ID
 const getUserById = asyncHandler(async(req, res) => {
@@ -158,4 +163,4 @@ const getUserById = asyncHandler(async(req, res) => {
     }
   });
  
- export { authUser, getUserById, registerUser, getUserProfile, getAllUsers, updateUser, deleteUser }
+ export { authUser, getUserById, registerUser, getUserProfile, getAllUsers, updateUser, deleteUser, getpanelMembers }
