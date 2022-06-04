@@ -4,14 +4,12 @@ import Marking from '../models/markingModel.js';
  
 const createMarking = asyncHandler(async (req, res) => {
     const {
-        moduleName,
         assignmentName,
         overallMark,
         attachment
     } = req.body;
   
     const newmarking = new Marking({
-      moduleName,
       assignmentName,
       overallMark,
       attachment,

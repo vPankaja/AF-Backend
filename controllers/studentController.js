@@ -2,7 +2,6 @@ import express from "express";
 
 import StudentGroup from "../models/studentGroupModel.js";
 import researchTopic from "../models/researchTopicModel.js";
-import User from "../models/userModel.js";
 
 import asyncHandler from "express-async-handler";
 import generateToken from '../utils/generateTokens.js'
@@ -13,16 +12,16 @@ const router = express.Router();
 const createStudent = asyncHandler(async (req, res) => {
   const { name, nic, gender, contactNo, email, password } = req.body
 
-  const userExists = await User.findOne({ email })
+  const topicResearchExists = await User.findOne({ email })
 
-  if(userExists) {
+  if(topicResearchExists) {
       res.status(400)
       throw new Error('Student already exists')
   }
 
   const type = "STUDENT";
 
-  const user = await User.create({
+  const topicResearch = await User.create({
       name,
       nic,
       gender,
@@ -32,20 +31,20 @@ const createStudent = asyncHandler(async (req, res) => {
       type
   })
 
-  if(user) {
+  if(topicResearch) {
       res.status(201).json({
-       _id: user._id,
-       name: user.name,
-       nic: user.nic,
-       gender: user.gender,
-       contactNo: user.contactNo,
-       email: user.email,
-       type: user.type,
-       token: generateToken(user._id),
+       _id: topicResearch._id,
+       name: topicResearch.name,
+       nic: topicResearch.nic,
+       gender: topicResearch.gender,
+       contactNo: topicResearch.contactNo,
+       email: topicResearch.email,
+       type: topicResearch.type,
+       token: generateToken(topicResearch._id),
       })
   } else {
       res.status(400)
-      throw new Error('Invalid user data')
+      throw new Error('Invalid topicResearch data')
   }
 });
 
@@ -210,4 +209,32 @@ const registerTopic = asyncHandler(async (req, res) => {
   //   });
 });
 
-export { createStudent, getStudents, createGroup, getGroups, checkStudentinGroup, checkStudentGroup, getTopicByGroup, assignCoSup, getResearchByID, registerTopic };
+//get All Topics
+const getAllTopics = asyncHandler(async (req, res) => {
+    const topicResearch = await researchTopic.find({});
+    res.json(topicResearch);
+  });
+
+
+// get Topic by ID
+const getTopicById = asyncHandler(async(req, res) => {
+    const topicResearch = await researchTopic.findById(req.params.id)
+ 
+    if(topicResearch){
+        res.json({
+          _id: topicResearch._id,
+          topic: topicResearch.topic,
+          groupId: topicResearch.groupId,
+          supervisor: topicResearch.supervisor,
+          coSupervisor: topicResearch.coSupervisor,
+          status: topicResearch.status,
+        })
+         
+    }else {
+        res.status(404)
+        throw new Error('User not found')
+    }
+ 
+ })
+
+export { createStudent, getAllTopics, getTopicById, getStudents, createGroup, getGroups, checkStudentinGroup, checkStudentGroup, getTopicByGroup, assignCoSup, getResearchByID, registerTopic };
