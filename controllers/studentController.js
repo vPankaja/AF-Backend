@@ -176,6 +176,30 @@ const getResearchByID = asyncHandler(async(req, res) => {
   }
 })
 
+// Update research
+const updateResearch = asyncHandler(async(req,res) => {
+  const id = req.params.id
+  const {topic, groupId, supervisor, status} = req.body
+  const coSupervisor = "Not assigned";
+
+  const updateResearch = {
+    topic,
+    groupId,
+    supervisor,
+    coSupervisor,
+    status,
+  }
+
+  const update = await researchTopic.findByIdAndUpdate(id, updateResearch, function(err, doc) {
+    if(err) {
+      res.status(650);
+    }
+    else {
+      res.json(doc)
+    }
+  })
+})
+
 // Register research topic
 const registerTopic = asyncHandler(async (req, res) => {
   const topic = req.body.topic;
