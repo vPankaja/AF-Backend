@@ -25,6 +25,8 @@ import documentUploadController from "./controllers/documentUploadController.js"
 import SupEvaluation from "./routes/SupEvaluation.js"
 import getTopic from "./routes/getTopic.js"
 
+import PanelEve from "./routes/PanelEveRoute.js"
+
 dotenv.config();
 
 //connect database
@@ -55,6 +57,8 @@ app.use('/api/documents/', documentUploadController)
 
 app.use("/supEve",SupEvaluation);
 app.use("/SupTopic",getTopic);
+
+app.use("/PanelEve",PanelEve);
 
 const __dirname = path.resolve()
 //set upload folder
