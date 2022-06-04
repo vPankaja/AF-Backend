@@ -67,6 +67,28 @@ const registerUser = asyncHandler(async(req, res) => {
 
 })
 
+// get user profile
+const getUserProfile = asyncHandler(async(req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if(user){
+      res.json({
+       _id: user._id,
+       name: user.name,
+       nic: user.nic,
+       gender: user.gender,
+       contactNo: user.contactNo,
+       email: user.email,
+       type: user.type,
+      })
+       
+  }else {
+      res.status(404)
+      throw new Error('USer not found')
+  }
+
+})
+
 //get All Users
 const getAllUsers = asyncHandler(async (req, res) => {
     const user = await User.find({});
@@ -136,4 +158,4 @@ const getUserById = asyncHandler(async(req, res) => {
     }
   });
  
- export { authUser, getUserById, registerUser, getAllUsers, updateUser, deleteUser }
+ export { authUser, getUserById, registerUser, getUserProfile, getAllUsers, updateUser, deleteUser }

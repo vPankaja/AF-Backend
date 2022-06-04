@@ -1,6 +1,6 @@
 import  mongoose  from 'mongoose'
 
-const allocatePannelSchema = mongoose.Schema({
+const allocatePanelSchema = mongoose.Schema({
     groupId: {
         type: String,
         required: true
@@ -15,6 +15,6 @@ const allocatePannelSchema = mongoose.Schema({
     },
 })
 
-const AllocatePannel = mongoose.model("AllocatePannel", allocatePannelSchema);
+const AllocatePanel = mongoose.model("AllocatePanel", allocatePanelSchema);
 
-export default AllocatePannel;
+export default AllocatePanel;
