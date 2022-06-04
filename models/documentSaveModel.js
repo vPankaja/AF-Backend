@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const documentSchema = mongoose.Schema({
+const documentSaveSchema = mongoose.Schema({
     groupName: {
         type: String,
         required: true
@@ -21,6 +21,6 @@ const documentSchema = mongoose.Schema({
     timestamps: true,
 })
 
-const Document = mongoose.model('Document', documentSchema);
+const DocumentSave = mongoose.model('DocumentSave', documentSaveSchema);
 
-export default Document
+export default DocumentSave

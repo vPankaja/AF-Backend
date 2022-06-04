@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncHandler from "express-async-handler";
 import fs from 'fs';
-import Document from '../models/documentModel.js'
+import Document from '../models/documentSaveModel.js'
 
 // Save the upload in database
 const saveDocInDB = asyncHandler(async (req, res) => {
